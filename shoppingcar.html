@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>购物车</title>
+		<link rel="stylesheet" type="text/css" href="css/css.css"/>
+		<link rel="stylesheet" type="text/css" href="css/shop.css"/>
+		<link rel="stylesheet" type="text/css" href="font_ugkes5u85ozp8pvi/iconfont.css"/>
+	</head>
+	<body>
+		<header style="margin-bottom: 40px;" id="header-warp">
+			
+		</header>	
+		<a href="home-page.html" style="position: absolute; left: 330px; top: 0px;"><img src="img/shop-logo.jpg"/></a>
+		<div style="position: absolute;right: 80px; top:30px;"><img src="img/shop-nav.png"/></div>
+			
+		<div id="car">
+			 <div class="title">
+            <!--商品列表title-->
+	            <dl class="top">
+	                <dt><input id="chkall" checked="checked" name="" type="checkbox"/>全部</dt>
+	                
+	                <dd class="sp" style="width: 440px;">商品</dd>
+	                <dd class="dj">单价</dd>
+	                <dd class="sl">数量</dd>
+	                <dd class="jexj">金额小计</dd>
+	                <dd class="cz">操作</dd>
+	            </dl>
+        	</div>
+			<div class="car-main">
+				<!--<div class="shop-item">
+					<p><input type="checkbox" class="ck" checked="checked"/></p>
+					<img src="img/imgs/02.jpg"  style="width: 42px; height: 56px;"/>
+					<p style="width: 370px;">梦芭莎磨毛亲肤一片无痕内衣无钢圈舒适模杯光面文胸（011017308)
+						品牌：梦芭莎　尺寸：70A　颜色：黑色</p>
+					<span>￥55</span>
+					<p>
+						<span class="updateCount">+</span>
+						<span class="shop-count">1</span>
+						<span class="updateCount">-</span>
+						<em class="fl sumPrice">66元</em>
+						<i class="fl delBtn">删除</i>
+					</p>
+				</div>-->
+			</div>
+			<div class="car-bottom">
+				<div class="car-bl"><img src="img/show-2wm.png" /><img src="img/qc_code_bg.jpg" style="height: 100px; margin:10px;"/></div>
+				<div class="car-br">
+					<p>商品数量总计：<span id="num">0</span>件 折后商品总计￥<b id="sum">0.00</b></p>
+					<button>去结算</button>
+				</div>
+			</div>
+		</div>	
+				
+		<footer id="footer-warp"></footer>
+	</body>
+</html>
+<script src="js/jquery.min.js"></script>
+<script src="js/cookie.js"></script>
+<script>
+	window.onload=function(){
+		$("#header-warp").load("all.html .top")
+		$("#footer-warp").load("all.html #bottom-all")
+	}
+		
+		var arr = getCookie("shoplist");
+		var html = "";
+		for(var i in arr){
+			//var shopinfo = arr[i];
+			html +=`<div class="shop-item" style="border-bottom:1px solid #eee; margin-bottom:5px">
+					<p><input type="checkbox" class="ck" checked="checked"/></p>
+					<img src="img/imgs/${arr[i].src}"  style="width: 42px; height: 56px;"/>
+					<p style="width: 370px;">${arr[i].name}（011017308)
+						品牌：梦芭莎　尺寸：70A　颜色：黑色</p>
+					<span>${arr[i].price}</span>
+					<p class="count"  data-id=${arr[i].id}  data-name=${arr[i].name} data-src=${arr[i].src} data-price=${arr[i].price}>
+						<span class="updateCount">+</span>
+						<span class="shop-count">${arr[i].count}</span>
+						<span class="updateCount">-</span>
+						<em class="fl sumPrice">${arr[i].price*arr[i].count}元</em>
+						<i class="fl delBtn">删除</i>
+					</p>
+				</div>`;
+			
+		}
+		if(html==""){
+			html+=`<div class="shop-item">
+					<div id="tosy">购物车中还没有商品，请先挑选商品<a href="md-sy.html">去首页</a></div>
+				</div>`
+		}
+			$(".car-main").html( html );
+		
+		
+		
+
+		//全选
+		$("#chkall").click(function(){
+			$(".ck").prop("checked", $(this).prop("checked"));
+			jiesuan();
+		})
+		//console.log(arr)
+		//删除
+		$(".car-main").on("click","i",function(){
+			var id = $(this).parent().data("id");  //获取当前要删除的商品编号 和名称
+			//var pname = $(this).parent().find(".count").data("name");  //获取当前要删除的商品编号 和名称
+			
+			for(var i in arr){
+				if( id == arr[i].id){
+					arr.splice(i,1);//
+					//操作数组同时，也要改变cookie
+					setCookie("shoplist",JSON.stringify(arr));
+					$(this).parent().parent().remove();
+					location.reload()
+				}
+			}
+		})
+	
+		//加减操作
+		$(".updateCount").click(function(){
+			var sign = $(this).html();
+			var id = $(this).parent().data("id");  //获取当前要删除的商品编号 和名称
+			var pname = $(this).parent().data("name");  //获取当前要删除的商品编号 和名称
+			//取出数量
+			var num = $(this).parent().find(".shop-count").html();
+			if( sign == "-" && num == 1 ){
+				return;
+			}
+			for( var i in arr ){
+				if( id == arr[i].id && pname == arr[i].name ){
+					sign=="+" ? arr[i].count++ : arr[i].count--;
+					setCookie("shoplist",JSON.stringify(arr));
+					$(this).parent().find(".shop-count").html( arr[i].count );
+					$(this).parent().parent().find(".sumPrice").html( (arr[i].count * arr[i].price)+"元"  );
+				}
+			}
+			jiesuan();
+		})
+		
+		//点击复选框 结算
+	$(".ck").click(function(){
+		jiesuan();
+	})
+	//结算
+	 jiesuan()
+	function jiesuan(){
+		var money = 0;
+		var count = 0;
+		$(".ck:checked").each(function(){
+			count += parseInt( $(this).parent().parent().find(".shop-count").html() )
+			money += parseInt( $(this).parent().parent().find(".sumPrice").html() )
+		})
+		$("#num").html( count );
+		$("#sum").html( money );
+	}
+	$("button").click(function(){
+		var arr=getCookie("information")
+		if(arr==""){
+			location.href="http://127.0.0.1/s-object/jiesuan.html"
+		}else{
+			location.href="http://127.0.0.1/s-object/jiesuan2.html"
+		}
+		
+	})
+		
+</script>

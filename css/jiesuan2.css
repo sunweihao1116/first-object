@@ -1,0 +1,54 @@
+#js-box{width: 1200px; min-height: 550px; margin: 20px auto; border:1px solid #CCCCCC ;}
+	#js-box .pp{height: 38px; background: #eee; border-bottom: 1px solid #ddd; line-height: 38px; padding-left: 80px;font-size:16px; color: #000; font-weight: 600;  }
+	#js-box .pp>a{color: #E50163; font-size: 12px;display: inline-block; margin-left: 50px;font-weight: 100;}
+	#information .get-cookie{height: 55px; padding-left: 125px; line-height: 55px;color: #414141;border-bottom: 1px solid #ddd;}
+	#information .get-cookie>span{display: inline-block; margin-right: 20px;}
+
+#shop-mode{border-bottom: 1px solid #ddd;}
+	#shop-mode>p{line-height: 30px; height: 30px; padding-left: 125px;}
+	#shop-mode>p:nth-child(2){color: #E50163; font-size: 12px; position: relative;}
+	#shop-mode>p:nth-child(2)>a{display: inline-block;border: 1px solid #E50163; width: 14px; height: 14px;text-align: center;cursor: pointer; position: absolute; top: 8px; line-height: 14px;}
+	#shop-mode>p:nth-child(2)>span{color: #000;}
+	#shop-mode p{color: #666; font-size: 14px;}
+	#shop-mode p span{color: #E50163;}
+
+#js-main{font-size: 12px; color: #404040;}
+	#js-main table{width: 1020px;margin: 0 auto;border: 1px solid #ccc; border-collapse: collapse; height: 38px; text-align: center; line-height: 38px;}
+	#js-main table tr td{border:1px solid #ccc; width: 130px ;}
+	#js-main .tab-header{ background: #EEE; border-bottom: none;} 
+	#js-main .tab-header tr td{border-bottom: none;}
+	#js-main .tab-header tr td:nth-child(1){width: 630px;}
+	
+	#js-main #tab-main{height: 66px;}
+		#js-main #tab-main tr td:nth-child(1){width: 630px;}
+			#js-main #tab-main tr td dl{width: 500px; height: 66px; padding: 6px 0; margin: 0 auto; display: flex;}
+				#js-main #tab-main dl dt img{width: 42px; height: 54px;}
+				#js-main #tab-main dl dd{ margin-left: 10px;}
+				#js-main #tab-main dl dd p{ height: 20px; line-height: 20px; margin-bottom: 10px; padding: 5px 0;}
+				#js-main #tab-main dl dd span{color: #bbb; display:block; height: 16px; line-height: 16px;text-align: left;}
+
+	/*div#main-btm{color: red; background: #0086B3;}
+	.main-br div{display: flex;}*/
+
+	#js-main #js-btn{width: 1020px; height:100px; margin: 0 auto; text-align: right;}
+	#js-main #js-btn button{width: 200px; height: 35px; line-height: 35px; font-size: 22px; color: #fff; background: #E50163;text-align: center; border: none; cursor: pointer;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

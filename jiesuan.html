@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>订单信息</title>
+		<link rel="stylesheet" type="text/css" href="css/css.css"/>
+		<link rel="stylesheet" type="text/css" href="css/jiesuan.css"/>
+		<link rel="stylesheet" type="text/css" href="font_ugkes5u85ozp8pvi/iconfont.css"/>
+	</head>
+	<body>
+		<header style="margin-bottom: 40px;" id="header-warp"></header>
+		<a href="home-page.html" style="position: absolute; left: 330px; top: 0px;"><img src="img/shop-logo.jpg"/></a>
+		<div style="position: absolute;right: 80px; top:30px;"><img src="img/jiesuan-nav.png"/></div>
+		
+		<div id="main">
+			<div class="main-nav">
+				<p><span>收货信息</span><a id="href" href="#" style="color: #E50163; font-size: 12px; margin-left: 50px;">[修改]</a></p>
+				<p>切换到国外地址</p>
+			</div>
+			<div class="content">
+				*<p>收货人：</p> <input type="text" placeholder="请填写准确真实收货人姓名" id="name"/><span id="s1"></span><br>
+				*<p>选择地区：</p>
+				<select id="set1">
+					<option value="">请选择省份</option>
+				</select>
+				<select id="set2">
+					<option value="">请选择城市</option>
+				</select>
+				<select id="set3">
+					<option value="">请选择区/县</option>
+				</select><br>
+				*<p>详细地址：</p> <input id="xxdz" type="text" placeholder="请填写详细地址" style="width: 460px;"/><span id="s2"></span><br>
+				*<p>邮政编码：</p> <input id="yzbm" type="text" placeholder="请填写邮政编码" /><span id="s4"></span><br>
+				*<p>电子邮件：</p> <input id="email" type="text" placeholder="请填写邮箱" /><br>
+				*<p>手机：</p> <input id="tel" type="text" placeholder="请填写手机号码" /><span id="s3"></span><br>
+				*<p>电话：</p> <input  type="text" placeholder="请填写电话号码" />电话格式：如：010-65690100-021<br>
+				<div id="btn">确定</div>
+			</div>
+		</div>
+		<footer id="footer-warp"></footer>
+	</body>
+</html>
+<script src="js/jquery.min.js"></script>
+<script src="js/cookie.js"></script>
+<script src="js/jiesuan-zz.js"></script>
+<script>
+	window.onload=function(){
+		$("#header-warp").load("all.html .top")
+		$("#footer-warp").load("all.html #bottom-all")
+	}
+	
+	var provArr = ["辽宁","山西","河北"];
+	//      		 0     1  	2
+	var cityArr = [["沈阳","大连","铁岭"],["大同","太原"],["邯郸","石家庄","唐山","雄安"]];  
+	//				                     
+	var countyArr = [[["s1","s2"],["d1"],["昌图","莲花乡"]],[["t1","t2"],["y1"]],[["h1"],["s1","s2"],["tangshan1"],["xiongan1"]]];
+	//                         
+	$(function(){	 
+		for(var i=0;i<provArr.length;i++){		
+			var $op1=$("<option value="+i+">"+provArr[i]+"</option>");
+			
+			$("#set1").append($op1)
+		}
+	})
+	$("#set1").change(function(){
+		var index=$(this).val();
+		$("#set2")[0].length=1;
+		$("#set3")[0].length=1;
+		if(index==""){
+			return
+		}
+		var _cityArr=cityArr[index];
+		for(var i=0;i<_cityArr.length;i++){		
+			var $op2=$("<option value="+index+"_"+i+">"+_cityArr[i]+"</option>");
+			$("#set2").append($op2)
+		}	
+		
+	})
+	$("#set2").change(function(){
+		var str=$(this).val();
+		console.log(str)
+		$("#set3")[0].length=1;
+		if(str==""){
+			return 
+		}
+		var a1=str.split("_")[0];
+		var a2=str.split("_")[1];
+		var _countyArr=countyArr[a1][a2]
+		for(var i=0;i<_countyArr.length;i++){		
+			var $op3=$("<option>"+_countyArr[i]+"</option>");
+			$("#set3").append($op3)
+		}
+	})
+	
+</script>
+<script>
+	$("#href").click(function(){
+		location.reload()
+	})
+	
+</script>

@@ -1,0 +1,64 @@
+*{
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		font-family:"宋体";
+	}
+	a{text-decoration: none;}
+	ul li{list-style: none;}
+	img{display: block;}
+	
+	
+
+header{width:100%;height:70px; background: #f6f6f6;}
+		header .top{ height: 24px; border-bottom: 1px solid #eee; margin: 0 auto; display: flex;line-height: 24px;}
+			header .top span {display: block; background: url(../img/top.png) no-repeat left center; padding-left: 24px;  margin-left: 100px; height: 24px; width: 220px;font-family:宋体; font-size: 14px;line-height: 24px; color: #aaa;}
+			header .top ul{width: 540px; /*height: 20px*/; margin-left: 400px; display: flex; margin-left: 400px;}
+				header .top ul li{ background: url(../img/nav1-bg.png) no-repeat right center;}
+				header .top ul li:nth-child(8){background: none;}
+					header .top ul li a {/*height: 24px*/;font-family:宋体;text-align: center; padding: 0 10px;font-size: 14px;line-height: 24px; color: #aaa; }
+					.nav-wb{display: none; position: absolute; top:20px;z-index: 999;}
+					.nav-wx{display: none; position: absolute;top:20px;z-index: 999;}
+					header .top ul li:nth-child(3) a:hover img{display: block;}
+					
+					header .top ul li:nth-child(4) a:hover img{display: block;}
+					header .top ul li a:hover{color: red;}
+					
+
+
+	#bottom{padding: 20px 50px; height: 200px; width: 100%;background: white;}
+		#bottom>#ft{ height:200px;padding: 20px 0;}
+		#bottom>#ft>dl{margin-left: 30px;margin-top: 16px;float:left;width:110px;height:150px;}
+		#bottom #ft dl dt{font-weight: 900;margin-bottom: 15px;}
+		#bottom #ft dl a{color:dimgray;font-size: 12px;display: block;width:110px;margin-top: 8px;}
+		#bottom #ft dl a:hover{color: #E50163;}
+		#bottom #ft #wei{ padding-top: 10px; height: 115px;}
+
+		#fotter-nav1{width: 100%; height: 90px ; background: #fff; padding-bottom: 50px;}
+		#fotter-nav1>ul{width: 800px; margin: 0 auto; display: flex;}
+		#fotter-nav1>ul>li{border-right: 1px solid #ddd; padding: 0 10px;}
+		
+		#fotter-nav2{ background: #fff; width: 100%; color: #666;}
+		#fotter-nav2>ul{width: 500px; margin: 0 auto; text-align: center;display: flex;height:20px;}
+		#fotter-nav2>ul>li{padding: 0 5px; font-size: 12px; line-height: 20px; cursor: pointer;}
+		#fotter-nav2>ul>li:hover{color: #E50163;}
+		#fotter-nav2>p{margin: 0 auto; width: 760px; margin-top: 10px; font-size: 12px;}
+		
+		
+		#fotter-nav3{height: 100px; background: #fff; padding: 10px 0;}
+		#fotter-nav3>ul{width: 900px; margin:0 auto; display: flex;}
+		#fotter-nav3>ul>li{margin-right: 5px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>梦芭莎-注册</title>
+		<link rel="stylesheet" type="text/css" href="css/css.css"/>
+		<link rel="stylesheet" type="text/css" href="css/dl.css"/>
+		<style>
+			#success{width: 640px; height: 240px; position: absolute; left: 0; top: 0; right: 0; bottom: 0; margin: auto; padding: 10px; font-size: 12px; color: #666666;}
+			.success-top{display: flex ;width: 440px; height: 70px; margin-bottom: 10px;}
+			.success-top dd h1{font-size: 24px;color: #E50163; margin-bottom: 15px;}
+			.success-main{padding-left: 66px;}
+			.success-main .time{font-size: 24px;color: #E50163;}
+			.success-main .to{ margin-top: 20px;width: 540px; height: 40px; display: flex; justify-content: space-between;}
+			.success-main .to a{width: 250px; height: 40px;color: #fff; text-align: center; line-height: 40px; font-size: 20px; }
+			.success-main .to a:nth-child(1){background: #E50163;}
+			.success-main .to a:nth-child(2){background: #ddd;}
+		</style>
+	</head>
+	<body>
+		<header id="header">
+			<img src="img/dl-1.jpg" />
+		</header>
+		<div class="main">
+			
+			<img src="img/dl.jpg" />
+			<div class="dl">
+				<p>注册</p>
+				<div class="dl-main">
+					<input type="text" placeholder="手机号" id="uname" class="txt"/>
+					<span id="s1">请输入手机号</span>
+					<input type="text" placeholder="密码" id="upwd"class="txt"/>
+					<span id="s2">请输入6-18位的密码</span>
+					<input type="text" placeholder="确认密码" id="qpwd"class="txt"/>
+					<span id="s3">再次输入密码</span>
+					<div><input type="text" placeholder="验证码" id="yzm"/><div id="sjyzm" ></div></div>
+					<div>
+						<span id="s4"></span>
+						<b id="update" style="cursor: pointer;"> 换一张</b>
+					</div>
+					<div id="wjmm" style="margin: 10px 0;">
+						<p>忘记密码？</p>
+						<p id="dl" style="color: #E50163; cursor: pointer;">登录</p></div>
+					<input type="button" value="注册"id="btn" class="txt"/>
+					<div style="color: #f00;"><input id="check" type="checkbox" />*同意服务条款</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id="fotter-nav2" style="background: #CCCCCC;">
+			<ul>
+				<li>首页</li>
+				<li>公司简介</li>
+				<li>旗下品牌</li>
+				<li>零售店址</li>
+				<li>梦芭莎网盟</li>
+				<li>网店代理</li>
+				<li>网站地图 </li>
+				<li>友情链接</li>
+			</ul>
+			<p style="font-size: 12px;">Copyright © 2010-2019 梦芭莎官方网站，广州摩拉网络科技有限公司 All Rights Reserved 粤B2-20080069号 粤公网安备44010302000075</p>
+		</div>
+	</body>
+</html>
+<script src="js/jquery.min.js"></script>
+<script src="js/cookie.js"></script>
+<script>
+	$("#dl").click(function(){
+		location.href="login.html"
+	})
+	$("header").click(function(){
+		location.href="home-page.html"
+	})
+	var checkTel=null;
+	$("#uname").blur(function(){
+		var reg=/^1(3|5|8)[\d]{9}$/;
+		var str=$(this).val()
+		if(reg.test(str)){
+			
+			var cookieInfo = getCookie("uname");
+			if( cookieInfo.length != 0 ){//表示cookie中有数据
+				arr = cookieInfo;
+				for(var i in arr){
+					if($(this).val() == arr[i].name){
+						$("#s1").html("用户名重复")
+							break;
+					}else{
+						$("#s1").html("用户名可以使用")
+						checkTel=true;
+					}
+				}
+			}else{
+				$("#s1").html("用户名可以使用")
+				checkTel=true;
+			}
+			
+		}else{
+			checkTel=false;
+			$("#s1").html("用户名重复或不符合要求")
+		}
+	})
+	var checkPwd=null;
+	$("#upwd").blur(function(){
+		var reg=/^\w{6,18}$/;
+		var str=$(this).val()
+		if(reg.test(str)){
+			checkPwd=true;
+			$("#s2").html("密码可以使用")
+		}else{
+			checkPwd=false;
+			$("#s2").html("密码格式不正确")
+		}
+	})
+	var checkQpwd=null;
+	$("#qpwd").blur(function(){
+		if($(this).val()==$("#upwd").val()){
+			checkQpwd=true;
+			
+			$("#s3").html("两次密码输入一致")
+		}else{
+			checkQpwd=false;
+			alert()
+			$("#s3").html("两次输入不一致")
+		}
+	})
+	function rand(min,max){
+		return Math.floor( Math.random()*(max-min+1) ) + min;
+	}
+	function checkyzm(){
+		var arr=[];
+		for(var i=0;i<4;i++){
+			var code=rand(48,122)
+			while(code>57&&code<65||code>90&&code<96){
+			code=(rand(48,122))
+		}
+			arr[i]=String.fromCharCode(code)
+		}return arr.join("")
+	}
+	$("#sjyzm").html(checkyzm())
+	$("#update").click(function(){
+		$("#sjyzm").html(checkyzm())
+	})
+	var checkYzm=null;
+	$("#yzm").blur(function(){
+		if($(this).val()==$("#sjyzm").html()){
+			checkYzm=true;
+			$("#s4").html("验证码正确")
+		}else{
+			checkYzm=false;
+			$("#s4").html("验证码错误")
+		}
+	})
+	
+	
+		
+	
+	
+	
+	var num=10;
+	$("#btn").click(function(){
+		var arr=[]
+		var flag = true;
+		if(checkPwd&&checkPwd&&checkQpwd&&checkYzm&&$("#check").prop("checked")){
+			var _json={
+				"name" : $("#uname").val(),
+				"pwd" : $("#upwd").val()
+			}
+			var cookieInfo = getCookie("uname");
+				if( cookieInfo.length != 0 ){//表示cookie中有数据
+					arr = cookieInfo;
+					for(var i in arr){
+						if(_json.name == arr[i].name){
+							alert("用户名重复")
+							flag = false;
+							break;
+						}
+					}
+				}
+				if(flag){
+					arr.push(_json);
+					setCookie("uname",JSON.stringify(arr));
+					var dlname=$("#uname").val()
+					var totimer=setInterval(function(){
+						
+						num--;
+						if(num==0){
+							clearInterval(totimer)
+							location.href="http://127.0.0.1/12xm/md-sy.html"
+						}
+						html=`<div id="success">
+							<dl class="success-top">
+								<dt><img src="img/zc-success.png"/></dt>
+								<dd>
+									<h1>欢迎您加入梦芭莎！</h1>
+									<p>您的登录账号为：<span class="uname">${dlname}</span>,请妥善保管好您的账号和密码</p>
+								</dd>
+							</dl>
+							<div class="success-main">
+								<p><span class="time">${num}</span>秒后自动跳转到个人资料完善页面</p>
+								<div class="to"><a href="md-sy.html">马上购物</a><a href="#">进入我的梦芭莎</a></div>
+							</div>
+						</div>`
+						$(".main").html(html)
+					},1000)
+					
+				}
+		}
+		/*if(!$("#check").prop("checked")){
+			$("#check").parent().css("color","red")
+		}*/
+	})
+	$("#check").click(function(){
+		if($("#check").prop("checked")){
+			$(this).parent().css("color","#666")
+		}else{
+			$(this).parent().css("color","red")
+		}
+	})
+	
+</script>

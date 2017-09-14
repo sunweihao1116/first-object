@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>订单提交成功</title>
+		<link rel="stylesheet" type="text/css" href="css/css.css"/>
+		
+		<link rel="stylesheet" type="text/css" href="font_ugkes5u85ozp8pvi/iconfont.css"/>
+		<style type="text/css">
+			#main{
+				width: 1200px;
+				height: 200px;
+				margin: 0 auto;
+				border: 1px solid #ddd;
+				padding: 20px 0;
+				margin-bottom: 50px;
+				font-size: 12px;
+				color: #666;
+			}
+			#main span{
+				color: #E50163;
+			}
+			.content{
+				width: 850px;
+				margin: 0 auto;
+				
+			}
+			.true{
+				display: inline-block;
+				width: 20px;
+				height: 20px;
+				background: #E50163;
+				line-height: 20px;
+				text-align: center;
+				border-radius: 50%;
+			}
+			.content ul li{
+				height: 30px;
+				border-bottom: 1px solid #eee;
+				padding-top: 10px;
+				padding-left: 30px;
+			}
+			.content ul li a{
+				color: #E50163;
+			}
+		</style>
+	</head>
+	<body>
+		<header style="margin-bottom: 40px;" id="header-warp"></header>
+		<a href="home-page.html" style="position: absolute; left: 330px; top: 0px;"><img src="img/shop-logo.jpg"/></a>
+		<div style="position: absolute;right: 80px; top:30px;"><img src="img/jiesuan3.png"/></div>
+		
+		<div id="main">
+			<!--<div class="content">
+				<p><span style="color: #eee;" class="true">√</span><b style="color: #E50163; font-size: 18px;"> 订单提交成功</b> 请在收货时向快递员支付现金￥384.0,祝您购物愉快！</p>
+				<ul>
+					<li> 应付金额：￥348.0  <span> 货到付款：￥348.0</span></li>
+					<li>订单号：0031242252  货到付款：￥348.0  由梦芭莎发货</li>
+					<li><a href="jiesuan2.html">查看订单</a>|<a href="jiesuan.html">修改订单</a></li>
+				</ul>
+				<p style=" padding:10px 30px;">重要提醒：梦芭莎不会以<span>订单异常、系统升级</span>等任何理由，要求您提供银行卡信息办理退款或支付额外费用。请谨防上当受骗！</p>
+			</div>-->
+		</div>
+		<footer id="footer-warp"></footer>
+	</body>
+</html>
+<script src="js/jquery.min.js"></script>
+<script src="js/cookie.js"></script>
+
+<script>
+	window.onload=function(){
+		$("#header-warp").load("all.html .top")
+		$("#footer-warp").load("all.html #bottom-all")
+	}
+</script>
+<script>
+	var arr=getCookie("shoplist");
+	console.log(arr)
+	var sum=0;
+	for(var i in arr){
+		sum+=arr[i].count*arr[i].price
+	}
+	var html=`<div class="content">
+					<p><span style="color: #eee;" class="true">√</span><b style="color: #E50163; font-size: 18px;"> 订单提交成功</b> 请在收货时向快递员支付现金￥${sum}.0,祝您购物愉快！</p>
+					<ul>
+						<li> 应付金额：￥${sum}.0  <span> 货到付款：￥${sum}.0</span></li>
+						<li>订单号：0031242252  货到付款：￥${sum}.0  由梦芭莎发货</li>
+						<li><a href="jiesuan2.html">查看订单</a>|<a href="jiesuan.html">修改订单</a></li>
+					</ul>
+					<p style=" padding:10px 30px;">重要提醒：梦芭莎不会以<span>订单异常、系统升级</span>等任何理由，要求您提供银行卡信息办理退款或支付额外费用。请谨防上当受骗！</p>
+			</div>`
+	$("#main").html(html)
+</script>

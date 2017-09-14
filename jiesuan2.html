@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>确认结算</title>
+		<link rel="stylesheet" type="text/css" href="css/css.css"/>
+		<link rel="stylesheet" type="text/css" href="font_ugkes5u85ozp8pvi/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="css/jiesuan2.css"/>
+	</head>
+	<body>
+		<header style="margin-bottom: 40px;" id="header-warp"></header>
+		<a href="home-page.html" style="position: absolute; left: 330px; top: 0px;"><img src="img/shop-logo.jpg"/></a>
+		<div style="position: absolute;right: 80px; top:30px;"><img src="img/jiesuan-nav.png"/></div>
+		
+		<div id="js-box">
+			<div id="information">
+				<p class="pp">收货信息<a href="http://127.0.0.1/s-object/jiesuan.html">[修改]</a></p>
+				<div class="get-cookie"> 
+					<span class="us1"></span>
+					<span class="us2"></span>
+					<span class="us3"></span>
+					<span class="us4"></span>
+				</div>
+			</div >
+			<div id="shop-mode">
+				<p class="pp">支付及配送方式<a href="">[修改]</a></p>
+				<p>礼品卡激活 <span>账户余额、礼券抵扣：</span> <a>+</a></p>
+				<p>您选择使用<span> 货到付款 &nbsp;（现金支付）</span></p>
+				<p><span>1样商品</span>：梦芭莎快递运输</p>
+			</div>
+			<div id="js-main">
+				<p class="pp">商品信息</p>
+				<p style="height: 38px; line-height: 38px; margin-left: 125px;">以下商品由  梦芭莎  发货   <span style="color: #E50163;">免配送费</span></p>
+				<div style=" border-bottom: 1px solid #ccc; min-height: 300px; width: 1020px; margin: 0 auto 20px; padding-bottom: 40px;">
+					<table class="tab-header">
+						<tr>
+							<td>商品名称</td>
+							<td>梦芭莎价</td>
+							<td>数量</td>
+							<td>小计</td>
+						</tr>
+					</table>
+					<table id="tab-main">
+						<!--<tr>
+							<td>
+								<dl>
+									<dt><img src="img/imgs/02.jpg"/></dt>
+									<dd>
+										<p>欧美大牌高级定制拼镂空条纹蕾丝百搭OL气质无袖连衣裙（46715332）</p>
+										<span>品牌： 梦芭莎  尺寸：  S   颜色： 粉色</span>
+									</dd>
+								</dl>
+							</td>
+							<td>￥199.00</td>
+							<td>2</td>
+							<td style="color: #E50163;">￥398.00</td>
+						</tr>-->
+					</table>
+					<!--<div id="main-btm" style="display: flex;justify-content: space-between;width: 1020px;" >
+						<div class="main-bl">
+							优惠码：<input type="text"  /><button>提交</button>
+						</div>
+						<div class="main-br">
+							<div><p>商品总价：</p><span>￥398.00</span></div>
+							<div><p>配送费：</p><span>免配送费</span></div>
+							<div><p>初晓活动折扣：</p><span>-￥50.00</span></div>
+							<div><p>应付金额：</p><span>￥348.00</span></div>
+						</div>
+					</div>-->
+				</div>
+				<div id="js-btn"><h2 style=" padding: 10px ;">总计:￥<span class="sum" style="color: #E50163; font-size: 30px;"></span></h2><button>提交订单</button></div>
+			</div>
+			
+		</div>
+		
+		<footer id="footer-warp"></footer>
+	</body>
+</html>
+<script src="js/jquery.min.js"></script>
+<script src="js/cookie.js"></script>
+<script>
+	window.onload=function(){
+		$("#header-warp").load("all.html .top")
+		$("#footer-warp").load("all.html #bottom-all")
+	}
+	var arr=getCookie("information")
+	if(arr==""){
+		location.href="http://127.0.0.1/s-object/jiesuan.html"
+	}
+	for(var i in arr){
+		console.log(arr[i])
+		$(".us1").html(arr[i].name);
+		$(".us2").html(arr[i].address);
+		$(".us3").html(arr[i].code);
+		$(".us4").html(arr[i].tel);
+	}
+	
+	var arr=getCookie("shoplist");
+	var html=""
+	var sum=null;
+	for(var i in arr){
+		html+=`<tr>
+					<td style="cursor: pointer;">
+						<dl>
+							<dt><img src="img/imgs/${arr[i].src}"/></dt>
+							<dd>
+								<p>${arr[i].name}（46715332）</p>
+								<span>品牌： 梦芭莎  尺寸：  S   颜色： 粉色</span>
+							</dd>
+						</dl>
+					</td>
+					<td>￥${arr[i].price}.00</td>
+					<td>${arr[i].count}</td>
+					<td style="color: #E50163;">￥${arr[i].price*arr[i].count}.00</td>
+				</tr>`
+		sum+=arr[i].price*arr[i].count
+	}
+	$("#tab-main").html(html)
+	$(".sum").html(sum)
+	$("#tab-main").on("click","tr>td:first",function(){
+		location.href="http://127.0.0.1/s-object/shoppingcar.html"
+	})
+	$("button").click(function(){
+		location.href="http://127.0.0.1/s-object/jiesuan3.html"
+	})
+
+</script>
